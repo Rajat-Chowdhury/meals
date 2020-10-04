@@ -72,7 +72,17 @@ const MealsNavigator = () => {
             }
           )}
         />
-        <Stack.Screen name="MealDetailScreen" component={MealDetailScreen} />
+        <Stack.Screen
+          name="MealDetailScreen"
+          component={MealDetailScreen}
+          options={
+            {
+              title: 'Recipe ',
+              headerStyle: {
+                backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
+              },
+              headerTintColor: Platform.OS === 'android' ? '#fff' : Colors.primary
+            }} />
       </Stack.Navigator>
     )
   }
@@ -82,6 +92,14 @@ const MealsNavigator = () => {
         <Stack.Screen
           name="FavoritesScreen"
           component={FavoritesScreen}
+          options={
+            {
+              title: 'Favorites',
+              headerStyle: {
+                backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
+              },
+              headerTintColor: Platform.OS === 'android' ? '#fff' : Colors.primary
+            }}
         />
       </Stack.Navigator>
     )
