@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { CATEGORIES } from '../data/dummy-data';
 
 const CategoryMealScreen = props => {
-  console.log(props);
-  console.log(props.route.params.categoryId);
-  console.log(CATEGORIES)
+  // console.log(props);
+  // console.log(props.route.params.categoryId);
+  // console.log(CATEGORIES)
 
   // console.log(props.navigation.getParam('categoryId'));
   const catId = props.route.params.categoryId;
@@ -23,6 +23,8 @@ const CategoryMealScreen = props => {
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   screen: {

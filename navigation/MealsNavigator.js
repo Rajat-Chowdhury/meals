@@ -21,6 +21,13 @@ const BottomTab = createMaterialBottomTabNavigator();
 
 const MealsNavigator = () => {
 
+  const defaultOptions = {
+    headerStyle: {
+      backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
+    },
+    headerTintColor: Platform.OS === 'android' ? '#fff' : Colors.primary
+  }
+
   // const createSideDrawer = () => {
   //   return(
   //     <Drawer.Navigator>
@@ -46,17 +53,16 @@ const MealsNavigator = () => {
 
   const createMealsStack = () => {
     return (
-      <Stack.Navigator initialRouteName="Categories Screen">
+      <Stack.Navigator
+        mode="modal"
+        screenOptions={defaultOptions}>
         <Stack.Screen
           name="Categories Screen"
           component={CategoriesScreen}
           options={
             {
-              title: 'Meal Categories',
-              headerStyle: {
-                backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
-              },
-              headerTintColor: Platform.OS === 'android' ? '#fff' : Colors.primary
+              title: 'Meal Categories'
+
             }}
         />
         <Stack.Screen
@@ -65,10 +71,14 @@ const MealsNavigator = () => {
           options={({ route }) => (
             {
               title: route.params.title,
+
               headerStyle: {
-                backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
+                backgroundColor: Platform.OS === 'android' ? route.params.color : ''
               },
-              headerTintColor: Platform.OS === 'android' ? '#fff' : Colors.primary
+              headerTintColor: Platform.OS === 'android' ? '#fff' : route.params.color
+
+
+
             }
           )}
         />
@@ -77,30 +87,36 @@ const MealsNavigator = () => {
           component={MealDetailScreen}
           options={
             {
-              title: 'Recipe ',
-              headerStyle: {
-                backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
-              },
-              headerTintColor: Platform.OS === 'android' ? '#fff' : Colors.primary
+              title: 'Recipe '
+
             }} />
       </Stack.Navigator>
     )
   }
   const createFavoritesStack = () => {
     return (
-      <Stack.Navigator >
+      <Stack.Navigator
+        mode="modal"
+        screenOptions={defaultOptions} >
         <Stack.Screen
           name="FavoritesScreen"
           component={FavoritesScreen}
           options={
             {
-              title: 'Favorites',
-              headerStyle: {
-                backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
-              },
-              headerTintColor: Platform.OS === 'android' ? '#fff' : Colors.primary
+              title: 'Favorites'
+
             }}
         />
+      </Stack.Navigator>
+    )
+  }
+
+  const createFiltersStack = () => {
+    return (
+      <Stack.Navigator
+        mode="modal"
+        screenOptions={defaultOptions}>
+        <Stack.Screen name="FiltersScreen" component={FiltersScreen} options={{ title: "Filters" }} />
       </Stack.Navigator>
     )
   }
@@ -114,7 +130,7 @@ const MealsNavigator = () => {
           options={{ title: 'Meals App' }} />
         <Drawer.Screen
           name="FiltersScreen"
-          component={FiltersScreen}
+          children={createFiltersStack}
           options={{ title: 'Filters' }} />
       </Drawer.Navigator>
     </NavigationContainer>
