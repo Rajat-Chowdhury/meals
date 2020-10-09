@@ -2,16 +2,16 @@ import Category from '../models/category';
 import Meal from '../models/meal';
 
 export const CATEGORIES = [
-  new Category('c1', 'Italian', '#8a0c41', 'https://www.thesun.co.uk/wp-content/uploads/2020/08/NINTCHDBPICT000603046726.jpg'),
-  new Category('c2', 'Quick & Easy', '#c23636', 'https://images.media-allrecipes.com/images/75272.jpg'),
-  new Category('c3', 'Hamburgers', '#ba6f14', 'https://recipes-secure-graphics.grocerywebsite.com/0_GraphicsRecipes/4589_4k.jpg'),
-  new Category('c4', 'German', '#c9a206', 'https://www.expatica.com/app/uploads/sites/6/2020/03/Pretzels-bratwurst-and-sauerkraut-1024x683.jpg'),
-  new Category('c5', 'Light & Lovely', '#21569c', 'https://realfood.tesco.com/media/images/RFO-472x310-Sandwich-9f8596f6-c013-4351-9638-5a0a3e039bdd-0-472x310.jpg'),
-  new Category('c6', 'Exotic', '#0f7a23', 'https://media-cdn.tripadvisor.com/media/photo-s/10/c8/6b/52/exotic-food-range.jpg'),
-  new Category('c7', 'Breakfast', '#608087', 'https://iamafoodblog.b-cdn.net/wp-content/uploads/2019/02/full-english-7355w-2.jpg'),
-  new Category('c8', 'Asian', '#599651', 'https://fthmb.tqn.com/AzejH7JM1Mclws6Wq1kZZ0UFHGo=/chinese-pan-fried-dumplings-694499_dumpling-step-08-8a2fa534bd9a4802b9fafbe3f716a80e.jpg'),
-  new Category('c9', 'French', '#806c80', 'https://www.foodrepublic.com/wp-content/uploads/2016/05/ratatouille-10.jpg'),
-  new Category('c10', 'Summer', '#3c8c86', 'https://www.shethepeople.tv/wp-content/uploads/2017/06/Stay-cool-this-summer.jpg')
+  new Category('c1', 'Italian', '#f5428d'),
+  new Category('c2', 'Quick & Easy', '#f54242'),
+  new Category('c3', 'Hamburgers', '#f5a442'),
+  new Category('c4', 'German', '#f5d142'),
+  new Category('c5', 'Light & Lovely', '#368dff'),
+  new Category('c6', 'Exotic', '#41d95d'),
+  new Category('c7', 'Breakfast', '#9eecff'),
+  new Category('c8', 'Asian', '#b9ffb0'),
+  new Category('c9', 'French', '#ffc7ff'),
+  new Category('c10', 'Summer', '#47fced')
 ];
 
 export const MEALS = [

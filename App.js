@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, } from 'react-native';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { useFonts } from 'expo-font';
 import MealsNavigator from './navigation/MealsNavigator';
 import 'react-native-gesture-handler';
-// import { enableScreens } from 'react-native-screens';
- 
-// enableScreens();
+import { enableScreens } from 'react-native-screens';
+import Colors from './constants/Colors';
+
+enableScreens();
 
 
 // const fetchFonts = () => {
@@ -34,13 +35,15 @@ export default function App() {
   //   );
   // }
 
-  if(!fontsLoaded){
+  if (!fontsLoaded) {
     return <AppLoading />
   }
-  else{
+  else {
     return (
-      <MealsNavigator /> 
+      <>
+        <MealsNavigator />
+      </>
     )
   }
-  
+
 }

@@ -1,11 +1,11 @@
 import CategoriesScreen from "../screens/CategoriesScreen"
 
 class Category {
-    constructor(id, title, color, imgLink) {
+    constructor(id, title, color, imageUrl) {
         this.id = id;
         this.title = title;
         this.color = color,
-        this.imgLink = imgLink
+        this.imageUrl = imageUrl
     }
 
 }

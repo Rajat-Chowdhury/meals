@@ -10,27 +10,30 @@ const CategoriesScreen = props => {
 
   const renderGridItem = (itemData) => {
     return (
-      <CategoryGridTile title={itemData.item.title} imgLink={itemData.item.imgLink} color={itemData.item.color} onSelect ={() => 
-        {
+      <CategoryGridTile
+        title={itemData.item.title}
+        imageUrl={itemData.item.imageUrl}
+        color={itemData.item.color}
+        onSelect={() => {
           props.navigation.navigate('CategoryMealsScreen', {
-              categoryId: itemData.item.id,
-              title: itemData.item.title,
-              color: itemData.item.color
+            categoryId: itemData.item.id,
+            title: itemData.item.title,
+            color: itemData.item.color
           })
-      }
-      } />
+        }
+        } />
     )
   }
 
 
   return (
-   
-      <FlatList
+
+    <FlatList
       numColumns={2}
       data={CATEGORIES}
       renderItem={renderGridItem} />
-   
-    
+
+
   );
 };
 
@@ -44,8 +47,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  
-  
+
+
 });
 
 export default CategoriesScreen;

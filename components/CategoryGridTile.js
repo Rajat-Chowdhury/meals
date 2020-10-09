@@ -1,21 +1,45 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, TouchableNativeFeedback, ImageBackground, Platform } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 const CategoryGridTile = (props) => {
 
-    const imgSrc = { uri: 'https://imgix.bustle.com/uploads/image/2020/5/21/f99aafdb-775e-4220-ace2-2c1a0d7b6a35-howls-moving-castle-breakfast-cropped.jpg?w=2000&h=1090&auto=format%2Ccompress&cs=srgb&q=70&fit=crop&crop=focalpoint&blend=000000&blendAlpha=45&blendMode=normal&fp-x=0.5293333333333333&fp-y=0.49866666666666665' };
+
+    let TouchableCmp = TouchableOpacity;
+    if (Platform.OS === 'android' && Platform.Version >= 21) {
+        TouchableCmp = TouchableNativeFeedback
+    }
 
     return (
-        <TouchableOpacity style={{ ...styles.gridItem, backgroundColor: props.color }} onPress={props.onSelect}>
-            {/* <Image source={require(props.imgLink)} /> */}
-            <ImageBackground source={imgSrc}
-                style={styles.image}
-                resizeMode="cover">
-                <View >
-                    <Text style={styles.header}>{props.title}</Text>
+        <View style={{ ...styles.gridItem, backgroundColor: props.color }} >
+            <TouchableCmp
+                style={{ flex: 1 }}
+                onPress={props.onSelect}>
+                <View>
+                    <ImageBackground source={{ uri: props.imageUrl }}
+                        style={styles.image}
+                        resizeMode="cover" >
+                        <LinearGradient
+                            // Background Linear Gradient
+                            colors={['transparent', 'rgba(0,0,0,0.8)']}
+                            style={{
+                                position: 'absolute',
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                height: 100,
+                            }}
+                        />
+                        <Text style={styles.header}>{props.title}</Text>
+                    </ImageBackground>
+
+
+
                 </View>
-            </ImageBackground>
-        </TouchableOpacity>
+
+            </TouchableCmp>
+        </View>
     )
 }
 
@@ -23,7 +47,7 @@ const styles = StyleSheet.create({
     gridItem: {
         flex: 1,
         margin: 8,
-        height: 120,
+        height: 150,
         borderRadius: 10,
         justifyContent: 'center',
         overflow: 'hidden',
@@ -34,19 +58,21 @@ const styles = StyleSheet.create({
         elevation: 3
 
     },
-    header: {
-        fontFamily: 'product-sans-bold',
-        fontSize: 20,
-        color: 'white'
 
+    image: {
+        height: '100%',
+        width: '100%',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
 
     },
-    image: {
-        flex: 1,
-        paddingHorizontal: 20,
-        paddingVertical:10,
-        justifyContent: 'flex-end',
-        alignItems:'flex-end'
+    header: {
+        fontSize: 20,
+        color: 'white',
+        fontFamily: 'product-sans-bold',
+        textAlign: 'right',
+        margin: 15
+
     }
 
 })
