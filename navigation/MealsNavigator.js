@@ -2,7 +2,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import {Button} from 'react-native';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailScreen from '../screens/MealDetailScreen';
@@ -12,6 +12,9 @@ import Colors from '../constants/Colors';
 import { Platform } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import HeaderButton from '../components/HeaderButton';
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -57,7 +60,7 @@ const MealsNavigator = () => {
         mode="modal"
         screenOptions={defaultOptions}>
         <Stack.Screen
-          name="Categories Screen"
+          name="CategoriesScreen"
           component={CategoriesScreen}
           options={
             {
@@ -86,10 +89,25 @@ const MealsNavigator = () => {
           name="MealDetailScreen"
           component={MealDetailScreen}
           options={
-            {
-              title: 'Recipe '
-
-            }} />
+            ({ route }) => (
+              {
+                title: route.params.title,
+                // headerRight: () => (
+                //   <Button
+                //     onPress={() => alert('This is a button!')}
+                //     title="Info"
+                //     color="#fff" />)
+                headerRight: () => (
+                  <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                    <Item 
+                    title='Favourite' 
+                    iconName='ios-heart'
+                    onPress={() => console.log('Mark as fav')} />
+                  </HeaderButtons>
+                )
+              }
+              
+            )} />
       </Stack.Navigator>
     )
   }

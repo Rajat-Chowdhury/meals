@@ -9,6 +9,11 @@ const MealItem = (props) => {
         TouchableCmp = TouchableNativeFeedback;
     }
 
+    let type = 'green';
+    if(!props.isVegan && !props.isVegetarian ){
+        type='red';
+    }
+
     return (
         <View style={styles.mealItem}>
             <TouchableCmp onPress={props.onSelectMeal}>
@@ -17,7 +22,7 @@ const MealItem = (props) => {
                         <ImageBackground source={{ uri: props.image }} style={styles.bgImage}>
                             <LinearGradient
                                 // Background Linear Gradient
-                                colors={[ 'transparent','rgba(0,0,0,0.8)']}
+                                colors={['transparent', 'rgba(0,0,0,0.8)']}
                                 style={{
                                     position: 'absolute',
                                     left: 0,
@@ -26,13 +31,16 @@ const MealItem = (props) => {
                                     height: 100,
                                 }}
                             />
-                            <Text style={styles.title}  >{props.title}</Text>
+                            <View style={ styles.header }>
+                                <View style={{...styles.mealType,backgroundColor: type, borderWidth:2, borderColor:'white' }}></View>
+                                <Text style={styles.title}  >{props.title}</Text>
+                            </View>
                         </ImageBackground >
                     </View>
                     <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
-                        <Text style={{fontFamily:'product-sans', fontSize:15 }}>{props.duration} min</Text>
-                        <Text style={{fontFamily:'product-sans', fontSize:15 }}>{props.complexity.toUpperCase()}</Text>
-                        <Text style={{fontFamily:'product-sans', fontSize:15 }}>{props.affordability.toUpperCase()}</Text>
+                        <Text style={{ fontFamily: 'product-sans', fontSize: 15 }}>{props.duration} min</Text>
+                        <Text style={{ fontFamily: 'product-sans', fontSize: 15 }}>{props.complexity.toUpperCase()}</Text>
+                        <Text style={{ fontFamily: 'product-sans', fontSize: 15 }}>{props.affordability.toUpperCase()}</Text>
                     </View>
                 </View>
             </TouchableCmp>
@@ -49,9 +57,9 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#f5f5f5',
         borderWidth: 1,
-        borderColor:'lightgrey',
-        borderRadius:12,
-        overflow:'hidden',
+        borderColor: 'lightgrey',
+        borderRadius: 12,
+        overflow: 'hidden',
         marginBottom: 20
     },
     mealRow: {
@@ -64,14 +72,15 @@ const styles = StyleSheet.create({
     mealDetail: {
         paddingHorizontal: 10,
         justifyContent: 'space-between',
-        alignItems:'center',
+        alignItems: 'center',
+        // paddingTop:7
         height: '15%'
     },
     bgImage: {
         height: '100%',
         width: '100%',
-        justifyContent:'flex-end',
-        alignItems:'flex-end'
+        justifyContent: 'flex-end',
+        alignItems: 'stretch'
     },
     title: {
         fontFamily: 'product-sans-bold',
@@ -79,8 +88,20 @@ const styles = StyleSheet.create({
         color: 'white',
         paddingVertical: 5,
         paddingHorizontal: 12,
-        textAlign:'right'
+        // textAlign: 'right'
 
+    },
+    header: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems:'center'
+    },
+    mealType:{
+        height: 15, 
+        width: 15, 
+        borderRadius: 99, 
+        margin:10
+        
     }
 });
 
