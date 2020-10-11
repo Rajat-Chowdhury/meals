@@ -9,13 +9,14 @@ import FiltersScreen from '../screens/FiltersScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import Colors from '../constants/Colors';
 import { Platform } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 // import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons';
+import { Button } from 'react-native';
 
 
 
@@ -93,7 +94,7 @@ const MealsNavigator = () => {
     )
   }
 
-  const createMealsStack = () => {
+  const createMealsStack = (props) => {
     return (
       <Stack.Navigator
         mode="modal"
@@ -103,7 +104,15 @@ const MealsNavigator = () => {
           component={CategoriesScreen}
           options={
             {
-              title: 'Meal Categories'
+              title: 'Meal Categories',
+              headerLeft: () => (
+                <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                  <Item
+                    title='sideDrawer'
+                    iconName='md-menu'
+                    onPress={() => props.navigation.toggleDrawer()} />
+                </HeaderButtons>
+              )
 
             }}
         />
@@ -131,11 +140,6 @@ const MealsNavigator = () => {
             ({ route }) => (
               {
                 title: route.params.title,
-                // headerRight: () => (
-                //   <Button
-                //     onPress={() => alert('This is a button!')}
-                //     title="Info"
-                //     color="#fff" />)
                 headerRight: () => (
                   <HeaderButtons HeaderButtonComponent={HeaderButton}>
                     <Item
@@ -150,7 +154,7 @@ const MealsNavigator = () => {
       </Stack.Navigator>
     )
   }
-  const createFavoritesStack = () => {
+  const createFavoritesStack = (props) => {
     return (
       <Stack.Navigator
         mode="modal"
@@ -165,7 +169,16 @@ const MealsNavigator = () => {
           component={FavoritesScreen}
           options={
             {
-              title: 'Favorites'
+              title: 'Favorites',
+              headerLeft: () => (
+                <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                  <Item
+                    title='sideDrawer'
+                    iconName='md-menu'
+                    onPress={() => props.navigation.toggleDrawer()} />
+                </HeaderButtons>
+              )
+
 
             }}
         />
@@ -176,7 +189,7 @@ const MealsNavigator = () => {
             ({ route }) => (
               {
                 title: route.params.title,
-                headerRight: () => (
+                headerRight: ({route}) => (
                   <HeaderButtons HeaderButtonComponent={HeaderButton}>
                     <Item
                       title='Favourite'
@@ -191,19 +204,33 @@ const MealsNavigator = () => {
     )
   }
 
-  const createFiltersStack = () => {
+  const createFiltersStack = (props) => {
     return (
       <Stack.Navigator
         mode="modal"
         screenOptions={defaultOptions}>
-        <Stack.Screen name="FiltersScreen" component={FiltersScreen} options={{ title: "Filters" }} />
+        <Stack.Screen
+          name="FiltersScreen"
+          component={FiltersScreen}
+          options={{
+            title: "Filters",
+            headerLeft: () => (
+              <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                  title='sideDrawer'
+                  iconName='md-menu'
+                  onPress={() => props.navigation.toggleDrawer()} />
+              </HeaderButtons>
+            )
+          }} />
       </Stack.Navigator>
     )
   }
 
+
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator >
         <Drawer.Screen
           name="BottomTabs"
           children={createBottomTabs}
