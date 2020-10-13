@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, } from 'react-native';
+import { StatusBar, Text, View, } from 'react-native';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { useFonts } from 'expo-font';
@@ -41,6 +41,7 @@ export default function App() {
   else {
     return (
       <>
+        <StatusBar translucent backgroundColor='rgba(0,0,0,0.1)'/>
         <MealsNavigator />
       </>
     )

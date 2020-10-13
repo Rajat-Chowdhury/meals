@@ -135,6 +135,7 @@ const MealsNavigator = () => {
                   <Item
                     title='sideDrawer'
                     iconName='md-menu'
+                    iosColor='grey'
                     onPress={() => props.navigation.toggleDrawer()} />
                 </HeaderButtons>
               )
@@ -170,7 +171,8 @@ const MealsNavigator = () => {
                     <Item
                       title='Favourite'
                       iconName='ios-heart'
-                      onPress={() => console.log('Mark as fav')} />
+                      iosColor='grey'
+                      onPress={() => console.log(route)} />
                   </HeaderButtons>
                 )
               }
@@ -201,6 +203,7 @@ const MealsNavigator = () => {
                   <Item
                     title='sideDrawer'
                     iconName='md-menu'
+                    iosColor='grey'
                     onPress={() => props.navigation.toggleDrawer()} />
                 </HeaderButtons>
               )
@@ -220,6 +223,7 @@ const MealsNavigator = () => {
                     <Item
                       title='Favourite'
                       iconName='ios-heart'
+                      iosColor='grey'
                       onPress={() => console.log('Mark as fav')} />
                   </HeaderButtons>
                 )
@@ -245,7 +249,16 @@ const MealsNavigator = () => {
                 <Item
                   title='sideDrawer'
                   iconName='md-menu'
+                  iosColor='grey'
                   onPress={() => props.navigation.toggleDrawer()} />
+              </HeaderButtons>
+            ),
+            headerRight: () => (
+              <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                  title='save'   
+                  iosColor={Colors.primary} 
+                  onPress={() => console.log('filter saved')} />
               </HeaderButtons>
             )
           }} />
@@ -257,7 +270,7 @@ const MealsNavigator = () => {
   const CustomDrawerContent = (props) => {
     return (
       <DrawerContentScrollView {...props}>
-        <View style={{ height: Dimensions.get('window').height }} >
+        <View style={{ height: Dimensions.get('window').height - 30 }} >
           <View style={{ borderBottomColor: 'lightgrey', borderBottomWidth: 1, marginBottom: 0 }}>
             <DrawerItem
               label={() => <Text style={{
@@ -280,7 +293,7 @@ const MealsNavigator = () => {
           </View>
 
 
-          <View style={{ paddingBottom: 30 }}>
+          <View >
             <DrawerItem
               label="Made by RAJAT"
               icon={({ focused }) => (
@@ -302,7 +315,7 @@ const MealsNavigator = () => {
         drawerContent={props => <CustomDrawerContent {...props} />}
         drawerContentOptions={{
           activeBackgroundColor: 'lightgrey',
-          labelStyle: { fontFamily: 'product-sans-bold', fontSize: 17 },
+          labelStyle: { fontFamily: 'product-sans-bold', fontSize: 15 },
           itemStyle: { marginHorizontal: 0, padding: 5 },
 
         }} >

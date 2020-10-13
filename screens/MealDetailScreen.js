@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button, ScrollView, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Button, ScrollView, Image, TouchableHighlight } from 'react-native';
 import { MEALS } from '../data/dummy-data';
 import DefaultText from '../components/DefaultText';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -8,9 +8,20 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 
 const ListItem = (props) => {
-  return <View style={styles.item} >
-    <DefaultText style={styles.itemText} >{props.children}</DefaultText>
-  </View>
+
+  const [completed, setCompleted] = useState(false);
+
+  const toggleCompletedHandler = () => {
+    setCompleted(completed => !completed);
+  }
+
+  return (
+    <TouchableHighlight onPress={toggleCompletedHandler}>
+      <View style={completed ? styles.itemCompleted : styles.item} >
+        <DefaultText style={styles.itemText} >{props.children}</DefaultText>
+      </View>
+    </TouchableHighlight>
+  )
 }
 
 const MealDetailScreen = props => {
@@ -43,15 +54,15 @@ const MealDetailScreen = props => {
     glutenText = "Gluten free"
   }
 
-  let foodType ; 
-  if(selectedMeal.isVegan){
-    foodType="Vegan"
+  let foodType;
+  if (selectedMeal.isVegan) {
+    foodType = "Vegan"
   }
-  else if(selectedMeal.isVegetarian){
-    foodType="Vegetarian"
+  else if (selectedMeal.isVegetarian) {
+    foodType = "Vegetarian"
   }
-  else{
-    foodType="Non vegetarian"
+  else {
+    foodType = "Non vegetarian"
   }
 
   return (
@@ -60,12 +71,12 @@ const MealDetailScreen = props => {
         <Image source={{ uri: selectedMeal.imageUrl }} resizeMode="cover" style={styles.image} />
       </View>
       <View style={{ justifyContent: 'center', flexDirection: 'row' }}>
-        <View style={{ ...styles.tagContainer,backgroundColor: lactoseBackground }}>
-          <DefaultText style={{color: lactoseColor}}>{lactoseText}</DefaultText>
-          </View>
-        <View style={{ ...styles.tagContainer,backgroundColor: glutenBackground }}>
-          <DefaultText style={{color:glutenColor}}>{glutenText}</DefaultText>
-          </View>
+        <View style={{ ...styles.tagContainer, backgroundColor: lactoseBackground }}>
+          <DefaultText style={{ color: lactoseColor }}>{lactoseText}</DefaultText>
+        </View>
+        <View style={{ ...styles.tagContainer, backgroundColor: glutenBackground }}>
+          <DefaultText style={{ color: glutenColor }}>{glutenText}</DefaultText>
+        </View>
       </View>
 
 
@@ -172,6 +183,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: 'lightgrey'
+  },
+  itemCompleted: {
+    marginVertical: 5,
+    backgroundColor: 'lightgreen',
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'green'
   },
   itemText: {
     fontSize: 16
