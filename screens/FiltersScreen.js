@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet, Switch } from 'react-native';
 import DefaultText from '../components/DefaultText';
 import Colors from '../constants/Colors';
 
 
 const FilterSwitch = (props) => {
+
+
+
   return (<View style={styles.filterContainer}>
     <DefaultText style={styles.label}>{props.label}</DefaultText>
     <Switch
@@ -17,11 +20,30 @@ const FilterSwitch = (props) => {
 
 const FiltersScreen = props => {
 
+  const { navigation } = props;
+
   const [isGlutenFree, setIsGlutenFree] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
 
+  const saveFilters = useCallback(() => {
+
+    const appliedFilters = {
+      glutenFree: isGlutenFree,
+      lactoseFree: isLactoseFree,
+      vegan: isVegan,
+      vegetarian: isVegetarian
+    }
+
+    console.log(appliedFilters);
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian])
+
+  useEffect(
+    () => {
+      navigation.setParams({save : saveFilters});
+    }, [saveFilters]
+  );
 
 
   return (
@@ -54,7 +76,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 20
   },
-  label:{
+  label: {
     fontSize: 17
   }
 });

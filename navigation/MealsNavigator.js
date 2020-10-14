@@ -258,7 +258,7 @@ const MealsNavigator = () => {
                 <Item
                   title='save'   
                   iosColor={Colors.primary} 
-                  onPress={() => console.log('filter saved')} />
+                  onPress={props.route.state.routes[0].params.save} />
               </HeaderButtons>
             )
           }} />
