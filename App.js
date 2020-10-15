@@ -7,33 +7,30 @@ import MealsNavigator from './navigation/MealsNavigator';
 import 'react-native-gesture-handler';
 import { enableScreens } from 'react-native-screens';
 import Colors from './constants/Colors';
+import { createStore, combineReducers } from 'redux';
+import mealsReducer from './store/reducers/meals';
+import { Provider } from 'react-redux';
+
 
 enableScreens();
 
+const rootReducer = combineReducers({
+  meals: mealsReducer
+})
 
-// const fetchFonts = () => {
-//   return Font.loadAsync({
-//     'product-sans': require('./assets/fonts/Product-Sans-Regular.ttf'),
-//     'product-sans-bold': require('./assets/fonts/Product-Sans-Bold.ttf')
-//   });
-// };
+const store = createStore(rootReducer);
+
+
+
 
 export default function App() {
-  // const [fontLoaded, setFontLoaded] = useState(false);
+
 
   let [fontsLoaded] = useFonts({
     'product-sans': require('./assets/fonts/Product-Sans-Regular.ttf'),
     'product-sans-bold': require('./assets/fonts/Product-Sans-Bold.ttf')
   });
 
-  // if (!fontLoaded) {
-  //   return (
-  //     <AppLoading
-  //       startAsync={fetchFonts}
-  //       onFinish={() => setFontLoaded(true)}
-  //     />
-  //   );
-  // }
 
   if (!fontsLoaded) {
     return <AppLoading />
@@ -41,8 +38,11 @@ export default function App() {
   else {
     return (
       <>
-        <StatusBar translucent backgroundColor='rgba(0,0,0,0.1)'/>
-        <MealsNavigator />
+        <StatusBar translucent backgroundColor='rgba(0,0,0,0.1)' />
+        <Provider store={store}>
+          <MealsNavigator />
+        </Provider>
+
       </>
     )
   }

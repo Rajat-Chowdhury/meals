@@ -117,4 +117,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default MealItem
+export default MealItem;

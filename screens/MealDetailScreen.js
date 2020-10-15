@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, ScrollView, Image, TouchableHighlight } from 'react-native';
-import { MEALS } from '../data/dummy-data';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableHighlight } from 'react-native';
+
 import DefaultText from '../components/DefaultText';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { useSelector } from 'react-redux';
 
 
 const ListItem = (props) => {
@@ -26,13 +27,19 @@ const ListItem = (props) => {
 
 const MealDetailScreen = props => {
 
-
+  const availableMeals = useSelector(state => state.meals.meals)
 
   const mealId = props.route.params.mealId;
 
-  const selectedMeal = MEALS.find(meal => meal.id === mealId);
+  const selectedMeal = availableMeals.find(meal => meal.id === mealId);
 
   const tags = [selectedMeal.isLactoseFree, selectedMeal.isGlutenFree];
+
+  // useEffect(() => {
+  //   props.navigation.setParams({ mealTitle: selectedMeal.title });
+  // }, [selectedMeal])
+
+
 
   let lactoseColor = 'rgb(219,68,55)';
   let lactoseBackground = 'rgba(219,68,55,0.15)';

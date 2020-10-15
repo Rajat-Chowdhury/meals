@@ -224,7 +224,7 @@ const MealsNavigator = () => {
                       title='Favourite'
                       iconName='ios-heart'
                       iosColor='grey'
-                      onPress={() => console.log('Mark as fav')} />
+                      onPress={() => console.log('mrak as fav')} />
                   </HeaderButtons>
                 )
               }
@@ -258,7 +258,7 @@ const MealsNavigator = () => {
                 <Item
                   title='save'   
                   iosColor={Colors.primary} 
-                  onPress={props.route.state.routes[0].params.save} />
+                  onPress={() =>  props.route.state.routes[0].params.save()} />
               </HeaderButtons>
             )
           }} />
