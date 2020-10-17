@@ -15,7 +15,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Entypo, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-
+import {useDispatch} from 'react-redux';
 
 
 
@@ -224,7 +224,7 @@ const MealsNavigator = () => {
                       title='Favourite'
                       iconName='ios-heart'
                       iosColor='grey'
-                      onPress={() => console.log('mrak as fav')} />
+                      onPress={route.params.toggleNav} />
                   </HeaderButtons>
                 )
               }

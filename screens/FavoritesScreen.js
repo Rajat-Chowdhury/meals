@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 
 const FavoritesScreen = props => {
 
-  const favMeals = useSelector(state => state.meals.favouriteMeals)
+  const favMeals = useSelector(state => state.meals.meals);
 
   
 
@@ -20,12 +20,5 @@ const FavoritesScreen = props => {
 };
 
 
-// const styles = StyleSheet.create({
-//   screen: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center'
-//   }
-// });
 
 export default FavoritesScreen;

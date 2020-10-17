@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableHighlight } from 'react-native';
 
 import DefaultText from '../components/DefaultText';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleFavorite } from '../store/actions/meals'
 
 const ListItem = (props) => {
 
@@ -35,10 +35,15 @@ const MealDetailScreen = props => {
 
   const tags = [selectedMeal.isLactoseFree, selectedMeal.isGlutenFree];
 
-  // useEffect(() => {
-  //   props.navigation.setParams({ mealTitle: selectedMeal.title });
-  // }, [selectedMeal])
+ const dispatch = useDispatch();
 
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(selectedMeal.id));
+  }, [dispatch, mealId])
+
+  useEffect(
+    props.navigation.setParams({toggleFav : toggleFavoriteHandler})
+    , [toggleFavoriteHandler])
 
 
   let lactoseColor = 'rgb(219,68,55)';
